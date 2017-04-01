@@ -11,10 +11,9 @@ public class Solution005 {
         for (int start = 0, end = size, subsize = size; subsize > 0; subsize--) {
 
             while (end <= size) {
-                String sub = s.substring(start, end);
 
-                if (isPalindromic(sub) && sub.length() > 0)
-                    return sub;
+                if (isPalindromic(s, start, end) && end - start > 0)
+                    return s.substring(start, end);
 
                 start++;
                 end++;
@@ -27,16 +26,14 @@ public class Solution005 {
         return "";
     }
 
-    private boolean isPalindromic(String s) {
-        if (s == null || s.length() < 2)
-            return true;
-
-
-        int size = s.length();
-        for (int i = 0; i < size / 2; i++) {
-            if (s.charAt(i) != s.charAt(size - 1 - i))
+    private boolean isPalindromic(String s, int start, int end) {
+        while (end - start > 1) {
+            if (s.charAt(start) != s.charAt(end - 1))
                 return false;
+            start++;
+            end--;
         }
+
         return true;
     }
 
