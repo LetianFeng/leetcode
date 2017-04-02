@@ -4,28 +4,24 @@ import java.util.List;
 public class Solution022 {
     public List<String> generateParenthesis(int n) {
         List<String> result = new ArrayList<>();
-        result.add("");
-        return generateOneMoreParenthesis(result, n);
+        generateOneMoreParenthesis(result, "", 0, 0, n);
+        return result;
     }
 
-    private List<String> generateOneMoreParenthesis(List<String> list, int n) {
-        if (n == 0)
-            return list;
-
-        List<String> result = new ArrayList<>();
-        for (String s : list) {
-            String s1 = "(" + s + ")";
-            String s2 = "(" + ")" + s;
-            String s3 = s + "(" + ")";
-            if (!result.contains(s1))
-                result.add(s1);
-            if (!result.contains(s2))
-                result.add(s2);
-            if (!result.contains(s3))
-                result.add(s3);
+    private void generateOneMoreParenthesis(List<String> result, String s, int left, int right, int n) {
+        if (left == n && right == n) {
+            result.add(s);
+            return;
         }
-        return generateOneMoreParenthesis(result, n - 1);
+
+        if (left < n) {
+            generateOneMoreParenthesis(result, s + "(", left + 1, right, n);
+        }
+        if (right < left) {
+            generateOneMoreParenthesis(result, s + ")", left, right + 1, n);
+        }
     }
+
 
     public static void main(String[] args) {
         int n = 3;
