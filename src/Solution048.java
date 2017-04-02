@@ -1,6 +1,8 @@
 public class Solution048 {
     public void rotate(int[][] matrix) {
         int size = matrix.length;
+        if (size == 1)
+            return;
         for (int i = 0; i < size; i++) {
             for (int j = i; j < size - i - 1; j++) {
                 int leftUp = matrix[i][j];
