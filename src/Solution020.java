@@ -6,25 +6,19 @@ public class Solution020 {
             return false;
 
         Stack<Character> stack = new Stack<>();
-        int size = s.length();
-        for (int i = 0; i < size; i++) {
-            if (!stack.isEmpty() && validPair(stack.peek(), s.charAt(i)))
-                stack.pop();
-            else
-                stack.push(s.charAt(i));
+
+        for (char c : s.toCharArray()) {
+            if (c == '(')
+                stack.push(')');
+            else if (c == '[')
+                stack.push(']');
+            else if (c == '{')
+                stack.push('}');
+            else if (stack.isEmpty() || c != stack.pop())
+                return false;
         }
 
         return stack.isEmpty();
-    }
-
-    private boolean validPair(char peek, char character) {
-        if (peek == '(' && character == ')')
-            return true;
-        if (peek == '[' && character == ']')
-            return true;
-        if (peek == '{' && character == '}')
-            return true;
-        return false;
     }
 
     public static void main(String[] args) {
