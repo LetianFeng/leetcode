@@ -43,7 +43,7 @@ public class Solution076 {
             }
         }
 
-        if (minLen > s.length())
+        if (minLen > size)
             return "";
 
         return s.substring(minLeft, minLeft + minLen);
