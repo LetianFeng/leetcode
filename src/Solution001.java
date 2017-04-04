@@ -1,14 +1,17 @@
 import java.util.HashMap;
 
 public class Solution001 {
-    public int[] twoSum(int[] numbers, int target) {
+    public int[] twoSum(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+
         HashMap<Integer, Integer> map = new HashMap<>();
         int i = 0;
-        for (int num : numbers) {
-            if (!map.containsKey(num))
-                map.put(target - num, i);
-            else
+        for (int num : nums) {
+            if (map.containsKey(num))
                 return new int[]{map.get(num), i};
+            else map.put(target - num, i);
             i++;
         }
 
