@@ -8,30 +8,32 @@
  */
 public class Solution002 {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode n1 = l1;
-        ListNode n2 = l2;
-        ListNode sentinel = new ListNode(0);
-        int carry = 0;
+        if (l1 == null || l2 == null)
+            return null;
 
-        ListNode node = sentinel;
+        int sum = l1.val + l2.val;
+        ListNode head = new ListNode(sum % 10);
+        ListNode tail = head;
+
+        ListNode n1 = l1.next, n2 = l2.next;
+
         while (n1 != null || n2 != null) {
+            sum /= 10;
             if (n1 != null) {
-                carry += n1.val;
+                sum += n1.val;
                 n1 = n1.next;
             }
             if (n2 != null) {
-                carry += n2.val;
+                sum += n2.val;
                 n2 = n2.next;
             }
-
-            node.next = new ListNode(carry % 10);
-            node = node.next;
-            carry /= 10;
+            tail.next = new ListNode(sum % 10);
+            tail = tail.next;
         }
 
-        if (carry > 0)
-            node.next = new ListNode(carry);
+        if (sum > 9)
+            tail.next = new ListNode(1);
 
-        return sentinel.next;
+        return head;
     }
 }
