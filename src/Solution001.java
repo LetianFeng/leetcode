@@ -2,20 +2,18 @@ import java.util.HashMap;
 
 public class Solution001 {
     public int[] twoSum(int[] nums, int target) {
-        if (nums == null || nums.length == 0) {
-            return null;
-        }
+        if (nums == null || nums.length < 2)
+            return new int[] {0,0};
 
-        HashMap<Integer, Integer> map = new HashMap<>();
         int i = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
         for (int num : nums) {
-            if (map.containsKey(num))
-                return new int[]{map.get(num), i};
-            else map.put(target - num, i);
-            i++;
+            if (map.keySet().contains(num))
+                return new int[] {map.get(num), i};
+            else
+                map.put(target - num, i++);
         }
-
-        return null;
+        return new int[] {0,0};
     }
 
     public static void main(String[] args) {
